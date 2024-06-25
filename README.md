@@ -14,4 +14,4 @@ Pickle DeepLearning
 
 - Eye closing 모델
     - fine-tuning model('eyeclosing_0622.pth')
-    - 눈 감은 사진 path 출력
+    - 눈 감았을 경우 True 반환, path 출력
