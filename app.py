@@ -21,7 +21,7 @@ app = FastAPI()
 
 class ImageRequest(BaseModel):
     imageUrls: List[str]
-    strongClustering: Optional[bool] = True
+    strongClustering: Optional[bool] = False
     eyeClosing: Optional[bool] = False
     blurred: Optional[bool] = False
 
@@ -39,10 +39,10 @@ class ClusteringModel:
         self.model = models.efficientnet_b0(pretrained=True)
         self.model.classifier[1] = nn.Identity()  # Remove the classification layer
         self.model = self.model.to(device)
-        self.threshold = 0.775  # Default threshold
+        self.threshold = 0.7  # Default threshold
 
     def set_threshold(self, strong_clustering):
-        self.threshold = 0.775 if strong_clustering else 0.675
+        self.threshold = 0.7 if strong_clustering else 0.65
 
     def get_image_embedding(self, image):
         img_tensor = preprocess(image).unsqueeze(0).to(device)
@@ -86,7 +86,7 @@ class BlurModel:
     def __init__(self, model_path):
         self.model = models.mobilenet_v2(pretrained=True)
         self.model.classifier[1] = nn.Linear(self.model.last_channel, 2)  # Assuming 2 classes: blur and sharp
-        self.model.load_state_dict(torch.load(model_path, map_location=device), strict=False)
+        self.model.load_state_dict(torch.load(model_path, map_location=device))
         self.model.to(device)
  
     def predict_blur(self, image):
@@ -95,10 +95,12 @@ class BlurModel:
         with torch.no_grad():
             output = self.model(image_tensor)
             _, predicted = torch.max(output, 1)
-        
-        classes = ['sharp', 'blur']
-        predicted_class = classes[predicted.item()]
-        return predicted_class == 'blur'
+        print(predicted)        
+        if predicted == 0:
+            return False
+        else:
+            return True
+
 
 class EyeStateDetector:
     def __init__(self, model_path):
@@ -198,5 +200,8 @@ def process_urls(request: ImageRequest):
         for j in range(len(grouped_images[i])):
             url_idx = int(os.path.basename(grouped_images[i][j]).rstrip(".png"))
             grouped_images[i][j] = request.imageUrls[url_idx]
+
+
+    shutil.rmtree(member_folder)
 
     return {"groupedImages": grouped_images}
