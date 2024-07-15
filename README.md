@@ -8,6 +8,15 @@ Tave 13기 팀 23456 Pickle의 딥러닝 페이지입니다.
 |---------|:---------:|:---------:|
 |깃허브     |<a href="https://github.com/ben8169"> <img src="https://avatars.githubusercontent.com/ben8169" width="100px;"></a> | <a href="https://github.com/bce5180"> <img src="https://avatars.githubusercontent.com/bce5180" width="100px;"></a>|  
 
+## 📂파일 소개
+>**[Archive](https://drive.google.com/drive/folders/1uV0_wFwYJQhH9E_j5vy1lpu4JZXA5zsd?usp=sharing)** 에는, 최종모델 구축을 위해 실험한 모든 코드와 모델 파라미터들을 살펴보실 수 있습니다.
+- models/ - 최종 모델 파일 디렉토리
+- app.py - FastAPI를 통해 배포하는 모델 소스코드
+- license.txt - 코드 내 사용한 오픈소스 라이선스 고지
+- requirements.txt - Python pip 라이브러리 목록
+
+
+
 ## 🛠️기술 소개
 ### 1. 유사한 사진 클러스터링
    - EfficientNet b2 + 출력 layer를 Identity Matrix로 변경해 이미지를 임베딩
@@ -30,7 +39,7 @@ Tave 13기 팀 23456 Pickle의 딥러닝 페이지입니다.
 
   
 
-## 🗂️라이브러리 Version
+## 📋라이브러리 Version
 ```bash
 fastapi==0.111.0
 faiss-cpu==1.8.0
@@ -46,7 +55,6 @@ opencv-python-headless==4.10.0
 
 
 
-##
 
 
 
