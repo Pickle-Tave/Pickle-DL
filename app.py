@@ -1,4 +1,3 @@
-from email.policy import strict
 import os
 import shutil
 import numpy as np
@@ -15,7 +14,6 @@ import faiss
 import cv2
 import warnings
 from torchvision.models import EfficientNet_B2_Weights,MobileNet_V2_Weights 
-
 
 
 os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
@@ -153,7 +151,7 @@ class EyeStateDetector:
             for bbox in result.boxes.xyxy:
                 x1, y1, x2, y2 = map(int, bbox)
                 face_width, face_height = x2 - x1, y2 - y1
-                if face_width >= 45 and face_height >= 45:
+                if face_width >= 60 and face_height >= 60:
                     face_image = image[y1:y2, x1:x2]
                     faces.append(face_image)
         return faces

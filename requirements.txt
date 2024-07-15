@@ -1,0 +1,10 @@
+fastapi==0.111.0
+faiss-cpu==1.8.0
+numpy==1.26.4
+torch==2.3.1+cu121
+Pillow==10.3.0
+torchvision==0.18.1+cu121
+ultralytics==8.2.46
+pydantic==2.7.4
+requests==2.25.1
+opencv-python-headless==4.10.0
